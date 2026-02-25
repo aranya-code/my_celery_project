@@ -2,6 +2,7 @@ import os
 
 from celery import Celery
 
+
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celeryproject.settings')
 
@@ -20,6 +21,14 @@ app.autodiscover_tasks()
 def add(x, y):
     return x + y
 
+# #Scheduling Task Method 2
+app.conf.beat_schedule={
+    'every-10-seconds':{
+        'task': 'celeryproject.celery.add',
+        'schedule': 10,
+        'args': ('11', '200')
+    }
+}
 # @app.task(bind=True, ignore_result=True)
 # def debug_task(self):
 #     print(f'Request: {self.request!r}')

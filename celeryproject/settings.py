@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'django_celery_results',
+    'django_celery_beat', 
     
 ]
 
@@ -125,3 +126,15 @@ CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 # CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_EXTENDED = True
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+
+# #Scheduling Task Method 1
+# CELERY_BEAT_SCHEDULE = {
+#     'every-10-seconds':{
+#         'task': 'celeryproject.celery.add',
+#         'schedule': 10,
+#         'args': ('11', '200')
+#     }
+# }
